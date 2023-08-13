@@ -9,3 +9,4 @@ __pycache__
 !data/README.md
 !models/README.md
 !outputs/README.md
+.vscode/settings.json
