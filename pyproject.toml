@@ -1,21 +1,20 @@
 [tool.poetry]
-name = "ascender"
+name = "demucs_WebUI"
 version = "0.1.0"
-description = "Project template for XCCV group of cvpaper.challenge."
+description = "demucs WebUI"
 license = "MIT"
-authors = ["cvpaper.challenge XCCV group"]
-maintainers = ["yoshihiro fukuhara <gatheluck@gmail.com>"]
+authors = ["Masaki Aota"]
+maintainers = ["masakiaota <aotamasakimail@gmail.com>"]
 readme = "README.md"
 keywords = [
-    "ascender",
     "Python",
-    "projects",
-    "project templates",
-    "project directory",
+    "gradio",
+    "audio",
+    "separation",
+    "midi",
+    "music",
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Environment :: Console",
     "Environment :: GPU :: NVIDIA CUDA",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
@@ -23,9 +22,17 @@ classifiers = [
     "Programming Language :: Python",
     "Topic :: Software Development",
 ]
+packages = [{include = "*.py", from="src"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.10, <4.0"
+jupyterlab = "^4.0.4"
+torch = {url = "https://download.pytorch.org/whl/cu118/torch-2.0.1%2Bcu118-cp310-cp310-linux_x86_64.whl"}
+torchvision = {url = "https://download.pytorch.org/whl/cu118/torchvision-0.15.2%2Bcu118-cp310-cp310-linux_x86_64.whl"}
+torchaudio = {url = "https://download.pytorch.org/whl/cu118/torchaudio-2.0.2%2Bcu118-cp310-cp310-linux_x86_64.whl"}
+demucs = {git = "https://github.com/facebookresearch/demucs", rev = "0cb4a90"}
+
+
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
@@ -45,7 +52,7 @@ profile = "black"
 line_length = 88
 
 [tool.mypy]
-python_version = 3.8
+python_version = 3.10
 # following setting is same as pysen
 # https://github.com/pfnet/pysen/blob/main/setup.cfg#L12
 check_untyped_defs = true
