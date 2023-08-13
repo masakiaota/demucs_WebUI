@@ -1,3 +1,11 @@
+
+起動方法
+```
+poetry run gradio app.py
+```
+
+
+この下はあとで書き換える
 # Ascender
 
 ![stable](https://img.shields.io/badge/stable-v0.1.3-blue)
