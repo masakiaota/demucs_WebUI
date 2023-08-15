@@ -1,6 +1,8 @@
 # %%
 from __future__ import annotations
 
+print("app is starting...")
+
 import shutil
 from multiprocessing import cpu_count
 from pathlib import Path
