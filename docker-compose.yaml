@@ -14,11 +14,11 @@ services:
         - PYTHON_VERSION=3.10
         - UID=${HOST_UID-1001}
         - GID=${HOST_GID-1002}
-      context: ../../
-      dockerfile: environments/Dockerfile
+      context: ./
+      dockerfile: ./Dockerfile
     tty: true
-    volumes:
-        - ../../:/home/challenger/ascender
-        - nothing:/home/challenger/ascender/.venv/
+    # volumes:
+    #     - ../../:/home/challenger/ascender
+    #     - nothing:/home/challenger/ascender/.venv/
     ports:
         - 9000:9000

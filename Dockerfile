@@ -8,7 +8,7 @@ ARG UID=1001
 ARG GID=1002
 ARG PYTHON_VERSION=3.10
 ARG APPLICATION_DIRECTORY=/home/${USER_NAME}/${PROJECT_NAME}
-ARG RUN_POETRY_INSTALL_AT_BUILD_TIME="false"
+ARG RUN_POETRY_INSTALL_AT_BUILD_TIME="true"
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     LC_ALL="C.UTF-8" \
@@ -41,6 +41,15 @@ WORKDIR ${APPLICATION_DIRECTORY}
 
 # If ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true", install Python package by Poetry and move .venv under ${HOME}.
 # This process is for CI (GitHub Actions). To prevent overwrite by volume of docker compose, .venv is moved under ${HOME}.
-COPY --chown=${UID}:${GID} pyproject.toml poetry.lock poetry.toml .
+COPY --chown=${UID}:${GID} pyproject.toml poetry.lock poetry.toml ./
 RUN test ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true" && poetry install || echo "skip to run poetry install."
-RUN test ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true" && mv ${APPLICATION_DIRECTORY}/.venv ${HOME}/.venv || echo "skip to move .venv."
+# RUN test ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true" && mv ${APPLICATION_DIRECTORY}/.venv ${HOME}/.venv || echo "skip to move .venv."
+
+# copy source code
+COPY --chown=${UID}:${GID} ./data ./data
+# COPY --chown=${UID}:${GID} ./outputs ./outputs
+COPY --chown=${UID}:${GID} ./src ./src
+
+
+EXPOSE 9000
+CMD ["poetry", "run", "python", "src/app.py"]

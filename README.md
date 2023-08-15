@@ -1,8 +1,21 @@
 
-起動方法
+## 起動方法
+
+poetryの場合
 ```
-poetry run gradio app.py
+poetry run gradio src/app.py
 ```
+
+dockerの場合 (作成中)
+```
+docker-compose up
+```
+
+そうしたら ブラウザからlocalhost:9000 にアクセスすればOK。
+
+
+
+## 環境構築
 
 
 この下はあとで書き換える
