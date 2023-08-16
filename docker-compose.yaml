@@ -1,8 +1,5 @@
 version: "3.8"
 
-volumes:
-  nothing:
-
 services:
   core:
     runtime: nvidia
@@ -17,8 +14,5 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     tty: true
-    # volumes:
-    #     - ../../:/home/challenger/ascender
-    #     - nothing:/home/challenger/ascender/.venv/
     ports:
-        - 9000:9000
+        - 8080:8080

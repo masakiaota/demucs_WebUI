@@ -17,7 +17,7 @@ OUTPUT_DIR: Path = (DIR_OF_THIS_FILE / "../outputs/").resolve()
 
 
 class CFG:
-    server_port = 9000
+    server_port = 8080
     sample_input_file: str = (
         (DIR_OF_THIS_FILE / "../data/shining_star_shortest.mp3").resolve().as_posix()
     )
@@ -212,4 +212,4 @@ demo = gr.Interface(
 
 # %% launch
 demo.queue()
-demo.launch(server_port=cfg.server_port)
+demo.launch(server_port=cfg.server_port, server_name="0.0.0.0")

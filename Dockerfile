@@ -21,7 +21,8 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 RUN apt update && apt install --no-install-recommends -y \
     git curl make ssh openssh-client \
-    python${PYTHON_VERSION} python3-pip python-is-python3
+    python${PYTHON_VERSION} python3-pip python-is-python3 \
+    ffmpeg
     
 # Following is needed to swtich default python3 version
 # For detail, please check following link https://unix.stackexchange.com/questions/410579/change-the-python3-default-version-in-ubuntu
@@ -41,6 +42,7 @@ WORKDIR ${APPLICATION_DIRECTORY}
 
 # If ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true", install Python package by Poetry and move .venv under ${HOME}.
 # This process is for CI (GitHub Actions). To prevent overwrite by volume of docker compose, .venv is moved under ${HOME}.
+RUN echo "poetry version: $(poetry --version)"
 COPY --chown=${UID}:${GID} pyproject.toml poetry.lock poetry.toml ./
 RUN test ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true" && poetry install || echo "skip to run poetry install."
 # RUN test ${RUN_POETRY_INSTALL_AT_BUILD_TIME} = "true" && mv ${APPLICATION_DIRECTORY}/.venv ${HOME}/.venv || echo "skip to move .venv."
@@ -50,6 +52,9 @@ COPY --chown=${UID}:${GID} ./data ./data
 # COPY --chown=${UID}:${GID} ./outputs ./outputs
 COPY --chown=${UID}:${GID} ./src ./src
 
+# 事前にモデルをダウンロードしておく
+RUN poetry run python src/download_models.py && \
+    echo "downloaded models!"
 
-EXPOSE 9000
+EXPOSE 8080
 CMD ["poetry", "run", "python", "src/app.py"]
