@@ -1,3 +1,8 @@
+## これはなに？
+demucsという音源分離モデルをWebUI上で動かせるようにしたものです。
+
+![demucs_WebUI](data/screenshot.webp)
+
 
 ## 起動方法
 
@@ -8,15 +13,18 @@ poetry run gradio src/app.py
 
 dockerの場合 (作成中)
 ```
-docker-compose up
+sudo docker compose up
 ```
 
-そうしたら ブラウザからlocalhost:9000 にアクセスすればOK。
+そうしたら ブラウザからlocalhost:8080 にアクセスすればOK。
 
 
 
 ## 環境構築
 
+Ascenderをもとににしてます.
+
+WIP
 
 この下はあとで書き換える
 # Ascender
