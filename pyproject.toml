@@ -32,6 +32,7 @@ torchvision = {url = "https://download.pytorch.org/whl/cu118/torchvision-0.15.2%
 torchaudio = {url = "https://download.pytorch.org/whl/cu118/torchaudio-2.0.2%2Bcu118-cp310-cp310-linux_x86_64.whl"}
 demucs = {git = "https://github.com/facebookresearch/demucs", rev = "0cb4a90"}
 gradio = "^3.40.1"
+diffq = "^0.2.4"
 
 
 
