@@ -152,9 +152,21 @@ def demucs_separate(
 # %% gradio interface
 
 demo = gr.Interface(
+    title="Demucs Web UI",
+    description="""Demucs is a deep learning model for music source separation. This is a web UI for Demucs.\n
+Please refer to the following links for the meaning of each setting. [Code](https://github.com/facebookresearch/demucs/blob/8b48c27f82b0e119c91c613eee2ce87ba28575a0/demucs/separate.py#L53), [Readme](https://github.com/facebookresearch/demucs/#separating-tracks)\n
+```
+Overlap ... It can probably be reduced to 0.1 to improve a bit speed.
+Shifts ... This makes prediction `Shifts` times slower. A little more accurate.
+MP3 Bitrate ... The higher the bitrate, the better the sound quality, but the larger the file size.
+```
+""",
     fn=demucs_separate,
     inputs=[
-        gr.Audio(label="Input Audio", type="filepath"),
+        gr.Audio(
+            label="Input Audio",
+            type="filepath",
+        ),
         gr.Dropdown(choices=cfg.model_list, value=cfg.default_model, label="Model"),
         gr.Dropdown(
             choices=cfg.two_stems_list,
